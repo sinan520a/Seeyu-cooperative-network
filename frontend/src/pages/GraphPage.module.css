@@ -1,0 +1,130 @@
+/* ── Normal layout ─────────────────────────────────────────────────── */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 88px);
+}
+
+/* ── Fullscreen layout (network tab) ──────────────────────────────── */
+
+.pageFullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 0.25rem;
+}
+
+.tab,
+.tabActive {
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--text2);
+  background: transparent;
+  transition: all 0.15s;
+}
+.tabActive {
+  background: var(--accent);
+  color: #fff;
+}
+.tab:hover {
+  color: var(--text);
+}
+
+.searchSlot {
+  flex: 1;
+  max-width: 320px;
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+}
+
+.contentFullscreen {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+/* ── Floating controls for fullscreen mode ─────────────────────────── */
+
+.floatingSearch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 210;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 17, 23, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.tabsMini {
+  display: flex;
+  gap: 2px;
+}
+
+.tabMini,
+.tabActiveMini {
+  padding: 4px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.78rem;
+  color: var(--text2);
+  background: transparent;
+  transition: all 0.15s;
+}
+.tabActiveMini {
+  background: var(--accent);
+  color: #fff;
+}
+.tabMini:hover {
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .searchSlot {
+    max-width: none;
+  }
+  .floatingSearch {
+    top: auto;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    transform: none;
+    justify-content: center;
+  }
+}

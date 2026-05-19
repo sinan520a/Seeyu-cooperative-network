@@ -1,0 +1,334 @@
+.wrap {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  color: var(--text2);
+  font-size: 1.05rem;
+  line-height: 2;
+  pointer-events: none;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: var(--text2);
+  opacity: 0.7;
+}
+
+.graph {
+  flex: 1;
+  min-height: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(58, 123, 213, 0.12) 0%, rgba(15, 17, 23, 0.6) 40%, #0a0d12 100%);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.graph canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Subtle grid overlay + radial depth rings for sphere illusion */
+.graph::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 30%, rgba(15, 17, 23, 0.3) 55%, rgba(10, 13, 18, 0.5) 80%),
+    repeating-linear-gradient(rgba(255, 255, 255, 0.012) 0px, transparent 1px, transparent 32px, rgba(255, 255, 255, 0.012) 33px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.012) 0px, transparent 1px, transparent 32px, rgba(255, 255, 255, 0.012) 33px);
+}
+
+/* ── Floating controls panel ──────────────────────────────────────── */
+
+.controlsPanel {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 20;
+  background: rgba(15, 17, 23, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 220px;
+  max-width: 320px;
+  font-size: 0.8rem;
+  pointer-events: auto;
+}
+
+.controlRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.controlRow select {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.centerLabel {
+  color: var(--gold);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.loadingBadge {
+  color: var(--accent);
+  font-size: 0.75rem;
+  animation: pulse 1s infinite;
+}
+
+.backBtn {
+  background: var(--surface2);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 3px 10px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.backBtn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ── Slider ────────────────────────────────────────────────────────── */
+
+.sliderLabel {
+  color: var(--text2);
+  white-space: nowrap;
+  min-width: 60px;
+  font-size: 0.78rem;
+}
+
+.slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+}
+
+.sliderMax {
+  color: var(--text2);
+  font-size: 0.75rem;
+  min-width: 20px;
+  text-align: right;
+}
+
+/* ── Timeline ──────────────────────────────────────────────────────── */
+
+.timelineBtn {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 3px 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.15s;
+}
+
+.timelineBtn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.timelineBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.yearLabel {
+  color: var(--accent);
+  font-weight: 600;
+  min-width: 36px;
+  text-align: right;
+  font-size: 0.8rem;
+}
+
+/* ── Path display ──────────────────────────────────────────────────── */
+
+.pathInfo {
+  color: var(--accent2);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  word-break: break-all;
+  padding: 4px 8px;
+  background: rgba(255, 107, 157, 0.08);
+  border-radius: 6px;
+  border-left: 3px solid var(--accent2);
+}
+
+.selectHint {
+  color: var(--text2);
+  font-size: 0.75rem;
+}
+
+/* ── Tooltip ───────────────────────────────────────────────────────── */
+
+.tooltip {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  background: rgba(26, 29, 39, 0.96);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  max-width: 320px;
+  max-height: 260px;
+  overflow-y: auto;
+  font-size: 0.78rem;
+  pointer-events: none;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.tooltipRow {
+  padding: 2px 0;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tooltipRow + .tooltipRow {
+  border-top: 1px solid var(--border);
+}
+
+/* ── Floating person info card ─────────────────────────────────────── */
+
+.personCard {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 25;
+  background: rgba(15, 17, 23, 0.94);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  min-width: 180px;
+  max-width: 260px;
+  font-size: 0.82rem;
+  pointer-events: auto;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  animation: cardIn 0.2s ease-out;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.personCardClose {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: var(--text2);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.personCardClose:hover {
+  color: #fff;
+}
+
+.personCardName {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+  padding-right: 18px;
+}
+
+.personCardJa {
+  color: var(--text2);
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+}
+
+.personCardDetail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.personTag {
+  display: inline-block;
+  background: var(--surface2);
+  color: var(--text);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.73rem;
+  white-space: nowrap;
+}

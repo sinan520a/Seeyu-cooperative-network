@@ -1,0 +1,98 @@
+.wrap {
+  padding: 1rem 0;
+}
+
+.inputs {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 220px;
+  flex: 1;
+}
+
+.field label {
+  font-size: 0.85rem;
+  color: var(--text2);
+}
+
+.chip {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.15rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.btn {
+  padding: 0.6rem 1.5rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.btn:disabled {
+  background: var(--surface2);
+  color: var(--text2);
+  cursor: not-allowed;
+}
+
+.result {
+  margin-top: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.noPath {
+  color: var(--text2);
+}
+
+.len {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--accent2);
+}
+
+.chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.seiyuuNode {
+  background: var(--accent);
+  color: #fff;
+  padding: 0.3rem 0.7rem;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.workNode {
+  background: var(--surface2);
+  color: var(--text2);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  margin: 0 0.15rem;
+}
+
+.workNode::before {
+  content: "via ";
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
